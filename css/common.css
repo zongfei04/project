@@ -1,6 +1,36 @@
 .container{
-	width:1226px;
-	margin-left:auto;
+	width: 1226px;
+	margin-left: auto;
 	margin-right: auto;
-	/*background-color: black;*/
+}
+a{
+	font-size: 12px;
+	text-decoration: none;
+	color:#b0b0b0;
+}
+a:hover{
+	color: #fff;
+}
+.clearfix:after{
+	content: "";
+	clear:both;
+	display:block;
+	height: 0;
+	visibility: hidden;
+}
+.clearfix{
+	zoom: 1;
+}
+.sep{
+	color:#393d42;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+.cor1{
+	width:234px;
+	float:left;
+}
+.cor2{
+	width:978px;
+	float:right;
 }
