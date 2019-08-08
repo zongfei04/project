@@ -68,11 +68,34 @@
 }
 .product-list .product-item{
 	width:234px;
-	height: 340px;
 	margin-left:14px;
 	float:left;
 	text-align: center;
 	position: relative;
+}
+.product-list .product-item.product-item-l{
+	height:340px;
+}
+.product-list .product-item.product-item-m{
+	height:300px;
+	margin-bottom:14px;
+	background-color: #fff;
+}
+.product-list .product-item.product-item-m .product-img{
+	margin-top:30px;
+	margin-bottom:10px;
+}
+.product-list .product-item.product-item-m .product-name{
+	margin-bottom:5px;
+}
+.product-list .product-item.product-item-m .product-desc{
+	margin-bottom:10px;
+}
+.product-list .product-item.product-item-m:nth-child(1){
+	margin-left:0px;
+}
+.product-list .product-item.product-item-m:nth-child(5){
+	margin-left:0px;
 }
 .product-list .product-item .product-img{
 	width:160px;
@@ -115,6 +138,16 @@
 	top:0px;
 	left:0px;
 
+}
+.transition-box{
+		transition: box-shadow 0.3s linear,transform 0.3s linear;
+}
+.transition-box:hover{
+		box-shadow: 0 10px 10px rgba(0,0,0,0.2);
+		transform: translateY(-3px);
+}
+.skap{
+	cursor: pointer;
 }
 /*top样式开始*/
 	.top{
@@ -515,10 +548,123 @@
 		background-color: #f5f5f5;
 		padding-top: 20px;
 	}
+	/**/
+	.main .phone .bd .bd-img{
+		height: 614px;
+		background-color:red;
+		transition: box-shadow 0.3s linear,transform 0.3s linear;
+	}
+	.main .phone .bd .bd-img:hover{
+		box-shadow: 0 10px 10px rgba(0,0,0,0.2);
+		transform: translateY(-3px);
+	}
+	.main .phone .bd .bd-img img{
+		width: 100%;
+		height: 100%;
+	}
+	.main .phone .bd .bd-list{
+		height:614px;
+	}
+	.main .elec{
+		margin-top:20px;
+	}
+	.main .video{
+		margin-top:20px;
+	}
+	.main .video .bd{
+		height:285px;
+	}
+	.main .video .bd .video-item{
+		width: 296px;
+		height: 285px;
+		margin-left: 14px;
+		background-color: #fff;
+		float:left;	
+		text-align: center;
+	}
+	.main .video .video-item:nth-child(1){
+		margin-left:0px;
+	}
+	.main .video .video-item .video-img{
+		height:180px;
+		position:relative;
+	}
+	.main .video .video-item .video-img:hover span{
+		background-color: #ff6700;
+		border-color: #ff6700;
+	}
+	.main .video .video-item .video-img img{
+		width: 100%;
+		height: 100%;
+	}
+	.main .video .video-item .video-img span{
+		display: inline-block;
+		position:absolute;
+		left:21px;
+		bottom:10px;
+		width:36px;
+		height:24px;
+		border:2px solid #fff;
+		box-sizing: border-box;
+		border-radius: 30px;
+		text-align: center;
+		line-height: 20px;
+		background-color: rgba(0,0,0,0.6);
+	}
+	.main .video .video-item  span>i{
+		font-size: 30px;
+		color:white;
+	}
+	.main .video .video-item .video-name{
+		margin-top: 30px;
+		font-size:14px;
+		color:#333;
+	}
+	.main .video .video-item .video-name:hover{
+		color:#ff6700;
+	}
+	.main .video .video-item .video-desc{
+		margin-top:10px;
+		font-size:12px;
+		color:#b0b0b0;
+	}
+
 /*main样式结束*/
 /*footer样式开始*/
 	.footer{
 		height: 284px;
-		background-color: gray;
+		background-color: #fff;
+	}
+	.footer .service{
+		height:80px;
+		border-bottom: 1px solid #e0e0e0;
+		box-sizing: border-box;
+		padding: 27px 0px;
+	}
+	.footer .service .service-item{
+		float: left;
+		width: 20%;
+		height: 25px;
+		text-align: center;
+		line-height: 25px;
+		border-right: 1px solid #e0e0e0;
+		box-sizing: border-box;
+	}
+	.footer .service .service-item a{
+		font-size: 16px;
+		color:#616161;
+		transition: color 0.3s;
+	}
+	.footer .service .service-item a:hover{
+		color:#ff6700;
+	}
+	.footer .service .service-item a i{
+		font-size: 23px;
+		margin-right: 5px;
+		vertical-align: -4px;
+	}
+	.footer .links{
+		height:204px;
+		background-color: blue;
 	}
 /*footer样式结束
