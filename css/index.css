@@ -58,6 +58,24 @@
 	vertical-align: -2px;
 	margin-left: 5px;
 }
+.hd .more.tab .tab-item{
+	float: left;
+	margin-left: 30px;
+
+}
+.hd .more.tab .tab-item.active a{
+	color:#ff6700;
+	border-bottom: 2px solid #ff6700;
+}
+.hd .more.tab .tab-item a{
+	font-size: 16px;
+	color:#424242;
+	padding-bottom: 3px;
+}
+.hd .more.tab .tab-item a:hover{
+	color:#ff6700;
+	border-bottom: 2px solid #ff6700;
+}
 .ad{
 	height:120px;
 	margin-top:42px;
@@ -565,9 +583,12 @@
 	.main .phone .bd .bd-list{
 		height:614px;
 	}
+/*家电区域开始*/
 	.main .elec{
 		margin-top:20px;
 	}
+/*家电区域结束*/
+/*视频区域开始*/
 	.main .video{
 		margin-top:20px;
 	}
@@ -628,7 +649,7 @@
 		font-size:12px;
 		color:#b0b0b0;
 	}
-
+/*视频区域结束*/
 /*main样式结束*/
 /*footer样式开始*/
 	.footer{
@@ -665,6 +686,64 @@
 	}
 	.footer .links{
 		height:204px;
-		background-color: blue;
+		padding-top: 40px;
+		box-sizing: border-box;
+
+	}
+	.footer .links .links-item{
+		float: left;
+		margin-right: 100px;
+
+	}
+	.footer .links .links-item dt{
+		font-size: 14px;
+		color:#424242;
+		margin-bottom: 30px;
+	}
+	.footer .links .links-item a{
+		font-size:12px;
+		color: #757575;
+		cursor: pointer;
+		margin-bottom: 15px;
+	}
+	.footer .links .links-item a>dd{
+		margin-bottom: 15px;
+	}
+	.footer .links .links-item a:hover{
+		color:#ff6700;
+	}
+	.footer .links .links-contact{
+		float:right;
+		border-left: 1px solid #e0e0e0;
+		text-align: center;
+		padding-left: 66px;
+		padding-right:40px;
+
+	}
+	.footer .links .links-contact p:nth-child(1){
+		font-size: 22px;
+		color:#ff6700;
+		margin-bottom: 10px;
+	}
+	.footer .links .links-contact p:nth-child(2),
+	.footer .links .links-contact p:nth-child(3){
+		font-size:12px;
+		color:rgb(97,97,97);
+		margin-bottom: 5px;
+	}
+	.footer .links .links-contact a{
+		display: inline-block;
+		width:120px;
+		height:30px;
+		border:1px solid #ff6700;
+		box-sizing: border-box;
+		line-height: 29px;
+		margin-top: 15px;
+		color:#ff6700;
+		transition: all 0.3s;
+	}
+	.footer .links .links-contact a:hover{
+		background-color: #ff6700;
+		color: #fff;
 	}
 /*footer样式结束
