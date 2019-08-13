@@ -252,7 +252,7 @@
 	}
 	.top .top-nav{
 		float: left;
-		width: 680px;
+		width: 700px;
 		height: 34px;
 		/*background-color: green;*/
 	}
@@ -472,12 +472,12 @@
 		width:1225px;
 		height:460px;
 	}
-	.home .banner .carousel li{
+	.home .banner .carousel .carousel-img li{
 		position:absolute;
 		top:0px;
 		left:0px;
 	}
-	.home .banner .carousel li img{
+	.home .banner .carousel .carousel-img img{
 		width:1226px;
 		height:460px;
 	}
@@ -514,15 +514,25 @@
 		position:absolute;
 		bottom:25px;
 		right:35px;
+		
 	}
-	.home .banner .carousel .carousel-btn li{
+	.home .banner .carousel .carousel-btn>li{
 		float:left;
 		width:10px;
 		height:10px;
 		box-sizing: border-box;
-		background-color: red;
+		border-radius: 50%;
+		background-color: #7b8a97;
 		margin-left:10px;
-		/*border:2px solid;*/
+		border:2px solid #a3adb6;
+	}
+	.home .banner .carousel .carousel-btn li:nth-child(1){
+		background-color: #e3f4fe;
+		border-color: #889298;
+	}
+	.home .banner .carousel .carousel-btn li:hover{
+		background-color: #e3f4fe;
+		border-color: #889298;
 	}
 	/*小米抢购热销左侧左侧部分*/
 	.home .hot{
