@@ -280,33 +280,222 @@
     </div>
 </body>
 <script>
+    //获取输入框字符的长度
+    function getLength(str){
+        return str.replace(/[\u4e00-\u9fa5]/g,'aa').length
+    }
+    //对函数进行封装
+    function setError(oMsg,sMsg,oInput){
+        oMsg.className = 'err';
+        oMsg.innerHTML = sMsg;
+        oInput.className = 'input-err';
+    }
+    function setOk(oMsg,oInput){
+        oMsg.className = 'ok';
+        oMsg.innerHTML = '';
+        oInput.className = '';
+    }
+    //获取元素
     var oForm = document.forms[0];
     var oUsername = oForm.username;
-    //console.log(oUsername);
+    var oPhone = oForm.phone;
+    var oPwd = oForm.password;
     var aMsg = document.querySelectorAll('.msg');
     var aCancel = document.querySelectorAll('.cancel');
-    //console.log(aMsg[0]);
+    var oPwdChecklist = document.getElementById('pwdChecklist');
+    var aPwdCheckli = oPwdChecklist.querySelectorAll('li');
+    
+
+
+    init();
+    checkUsername();
+    checkPhone();
+    checkPwd();
+
+
+
+
+
+
     //页面初识化操作
-    oUsername.focus();
-    aMsg[0].innerHTML = '设置后不可更改<br>中英文均可，最长14个英文或7个汉字';
-    aMsg[0].className = 'tiptext';
-
-    //用户名输入后的操作
-    oUsername.oninput = function(){
-        var oVal = oUsername.value;
-        if(oVal.length > 0){
-           aCancel[0].style.display = 'block'; 
-        }
-        else{
-            aCancel[0].style.display = 'none';
-        }
-        
-    }
-    aCancel[0].onclick = function(){
-        oUsername.value = '';
-        aCancel[0].style.display = 'none';
+    function init(){
         oUsername.focus();
+        aMsg[0].innerHTML = '设置后不可更改<br>中英文均可，最长14个英文或7个汉字';
+        aMsg[0].className = 'tiptext';
+            //所有输入框输入后的操作(添加了事件代理)
+        oForm.oninput = function(ev){
+            var oVal = ev.target.value;//获取触发事件的操作
+            var oCancel = ev.target.nextElementSibling;//获取触发事件的下一个兄弟元素
+            if(oVal.length > 0){
+               oCancel.style.display = 'block'; 
+            }
+            else{
+                oCancel.style.display = 'none';
+            }     
+        }
+        //给所有的取消按钮添加绑定事件(添加了事件代理)
+        oForm.onclick = function(ev){
+            var oCancel = ev.target;
+            var oInput = oCancel.previousElementSibling;
+            //console.log(oCancel);
+            /*
+            if(oCancel.className == 'cancel'){
+                oInput.value = '';
+                oCancel.style.display = 'none';
+                oInput.focus();
+            }*/
+            if(oInput.name){
+                switch(oInput.name){
+                    case 'username':
+                    case 'phone':
+                    case 'password':
+                    case 'verify':
+                    oInput.value = '';
+                    oCancel.style.display = 'none';
+                    oInput.focus();
+                    break;  
+                } 
+            }
+        }
+    }
+    //验证用户名
+    function checkUsername(){
+        oUsername.onblur = function(){
+            var sVal = oUsername.value;
+            //正则全空
+            var reg1 = /^\s+$/;
+            //内容为中英文，数字和下划线
+            var reg2 = /[^\u4e00-\u9fa50-9a-zA-Z_]/g;
+            //内容为纯数字
+            var reg3 = /^[0-9]+$/
+            if(sVal == ''){
+                aMsg[0].className = 'msg';
+            }else if(reg1.test(sVal)){
+                oUsername.value = '';
+                aMsg[0].className = 'msg';
+                aCancel[0].style.display = 'none';
+            }else if(getLength(sVal) > 14){
+                setError(aMsg[0],'用户名不能超过7个汉字或14个字符',oUsername);
+                /* aMsg[0].className = 'err';
+                 aMsg[0].innerHTML = '用户名不能超过7个汉字或14个字符';
+                 oUsername.className = 'input-err';*/
+            }else if(reg2.test(sVal) || reg3.test(sVal)){
+                setError(aMsg[0],'用户名仅支持中英文、数字和下划线,且不能为纯数字',oUsername);
+                /* aMsg[0].className = 'err';
+                 aMsg[0].innerHTML = '用户名仅支持中英文、数字和下划线,且不能为纯数字';
+                 oUsername.className = 'input-err';*/
+            }else{
+                setOk(aMsg[0],oUsername);
+                /*aMsg[0].className = 'ok';
+                aMsg[0].innerHTML = '';
+                oUsername.className = '';*/
+            }
+        }
+        oUsername.onfocus = function(){
+            aMsg[0].innerHTML = '设置后不可更改<br>中英文均可，最长14个英文或7个汉字';
+            aMsg[0].className = 'tiptext';
+            
+        }  
+    }
 
+    //验证手机号
+    function checkPhone(){
+        oPhone.onblur = function(){
+            var sVal = oPhone.value;
+            //全局为空
+            var reg1 = /^\s+$/;
+            //正确的手机格式
+            var reg2 = /^1[3578]\d{9}$/
+            if(sVal == ''){
+                aMsg[1].className = 'msg';
+            }else if(reg1.test(sVal)){
+                oPhone.value = '';
+                aMsg[1].className = 'msg';
+                aCancel[1].style.display = 'none';
+            }else if(!reg2.test(sVal)){
+                setError(aMsg[1],'手机号码格式不正确',oPhone)
+            }else{
+                setOk(aMsg[1],oPhone);
+            }
+        }
+        oPhone.onfocus = function(){
+            aMsg[1].innerHTML = '请输入中国大陆手机号，其它用户不可见';
+            aMsg[1].className = 'tiptext';   
+        }
+        oPhone.onkeydown = function(ev){
+            var sVal = oPhone.value
+            if((ev.keyCode< 48 || ev.keyCode > 57 || sVal.length > 10) && ev.keyCode != 8 && ev.keyCode != 37 && ev.keyCode != 39 && (ev.keyCode< 96 || ev.keyCode > 105 || sVal.length > 10 )){
+                return false;
+            }
+        }
+    }
+    //验证密码
+    function checkPwd(){
+        var pwd1 = false,pwd3 = false,pwd3 = false;
+
+        oPwd.oninput = function(){
+            var sVal = oPwd.value; 
+            //长度为8-14个字符
+            var reg1 = /^.{8,14}$/;
+            //支持数字、字母和大小写符号
+            var reg2 = /^[0-9_a-zA-Z@!#\.\s]$/;
+            //不允许有空格
+            var reg3 = /\s/g;
+            //当输入值为0时，使后面面板重置
+            if(sVal.length == 0){
+                aPwdCheckli[0].className = 'pwd-checklist-item';
+                aPwdCheckli[1].className = 'pwd-checklist-item';
+                aPwdCheckli[2].className = 'pwd-checklist-item';
+            }//当输入值不为0时，执行后面的操作
+            else{
+                   if(!reg1.test(sVal)){
+                    aPwdCheckli[0].className = 'pwd-checklist-item pwd-checklist-item-error';
+                    pwd1 = false;
+                }else{
+                    aPwdCheckli[0].className = 'pwd-checklist-item pwd-checklist-item-success';
+                    pwd1 = true;
+                }
+                if(reg2.test(sVal)){
+                    aPwdCheckli[1].className = 'pwd-checklist-item pwd-checklist-item-error';
+                    pwd2 = false;
+                }else{
+                    aPwdCheckli[1].className = 'pwd-checklist-item pwd-checklist-item-success';
+                    pwd2 = true;
+                }
+                if(reg3.test(sVal)){
+                    aPwdCheckli[2].className = 'pwd-checklist-item pwd-checklist-item-error';
+                    pwd3 = false;
+                }else{
+                    aPwdCheckli[2].className = 'pwd-checklist-item pwd-checklist-item-success';
+                    pwd3 = true;
+                }  
+            }  
+        }
+        //当点击密码的取消按钮时，会将面板重置
+        aCancel[2].onclick = function(){
+            aPwdCheckli[0].className = 'pwd-checklist-item';
+            aPwdCheckli[1].className = 'pwd-checklist-item';
+            aPwdCheckli[2].className = 'pwd-checklist-item';
+        }
+        //密码离开时
+        oPwd.onblur = function(){
+            var sVal = oPwd.value;
+            var reg = /^\s+$/;
+            if(sVal == ''){
+                oPwdChecklist.style.display = 'none';
+            }else if(reg.test(sVal)){
+                oPwd.value = '';
+                oPwdChecklist.style.display = 'none';
+                aCancel[2].style.display = 'none';
+            }else if(pwd1 && pwd2 && pwd3){
+                oPwdChecklist.style.display = 'none';
+                aMsg[2].className = 'ok';
+            }
+        }
+        oPwd.onfocus = function(){
+            oPwdChecklist.style.display = 'block';
+            aMsg[2].className = 'msg';
+        }
     }
 </script>
 </html>
