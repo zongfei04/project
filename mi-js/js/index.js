@@ -1,6 +1,6 @@
 
 handleCart();
-// handleNavcontent();
+handleNavcontent();
 handleCarousel()
 
 
@@ -12,10 +12,10 @@ function handleCart(){
 	var oCartContent = document.querySelector('.top .cart .cart-content');
 	var oLoader = oCartContent.querySelector('.loader');
 	var oSpan = oCartContent.querySelector('span');
-	console.log(oSpan)
+	
 
 
-	//2.绑定事件
+	//2.绑定事件 
 	oCart.onmouseenter = function(){
 		oLoader.style.display = 'block';
 		oCartBox.style.backgroundColor = '#fff';
@@ -39,6 +39,18 @@ function handleCart(){
 	}
 }
 //下拉手机菜单列表交互功能
+function handleNavcontent(){
+	//获取元素
+	var aNavitem = document.querySelectorAll('.header .header-nav-item');
+	var aNavContent = document.querySelector('.header .header-nav-content');
+	console.log(aNavContent);
+
+	for(var i = 0;i < aNavitem.length;i++){
+		aNavitem[i].onmouseenter = function(){
+			
+		}
+	}
+}
 
 
 //轮播图的交互功能

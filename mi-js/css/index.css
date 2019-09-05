@@ -320,15 +320,15 @@
 			right:20px;
 		}
 		.bottomBtn li{
-			width: 20px;
-			height: 20px;
+			width: 10px;
+			height: 10px;
 			border-radius: 50%;
 			margin-right: 10px;
 			background-color: rgba(0,0,0,0.5);
 			float: left;
 		}
 		.bottomBtn li.active{
-			background-color: rgba(0,0,0,0.8)
+			background-color: rgba(255,255,255,0.7);
 		}
 /*top样式开始*/
 	.top{
