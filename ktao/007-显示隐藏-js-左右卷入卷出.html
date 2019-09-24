@@ -96,13 +96,33 @@
 		slideLeftRight:{
 			//1.将隐藏之前的状态（水平值存起来）
 			//borderLeftWidth,paddingLeft,width,paddingRight,borderRightWidth
-			var styles = {
-				borderLeftWidth:$elem.css('borderLeftWidth'),
+			// var styles = {
+			// 	borderLeftWidth:$elem.css('borderLeftWidth'),
+			// 	paddingLeft:$elem.css('paddingLeft'),width:$elem.css('width'),
+			// 	borderRightWidth:$elem.css('borderLeftWidth'),
+			// 	paddingRight:$elem.css('paddingLeft'),
+			// 	$elem.data('styles',styles)
+			// 	console.log(styles);
+
+			// }
+			init:function($elem){
+				$elem.removeClass('transition');
+				//1.将隐藏之前的状态（水平值存起来）
+				//borderLeftWidth,paddingLeft,width,paddingRight,borderRightWidth
+				var styles = {
+			 	borderLeftWidth:$elem.css('borderLeftWidth'),
 				paddingLeft:$elem.css('paddingLeft'),width:$elem.css('width'),
-				borderRightWidth:$elem.css('borderLeftWidth'),
-				paddingRight:$elem.css('paddingLeft'),
-				$elem.data('styles',styles)
-				console.log(styles);
+			 	borderRightWidth:$elem.css('borderLeftWidth'),
+			 	paddingRight:$elem.css('paddingLeft'),
+				 }
+				 $elem.data('styles',styles)
+			 	 // console.log(styles);
+
+			},
+			show:function(){
+
+			},
+			hide:function(){
 
 			}
 		}
