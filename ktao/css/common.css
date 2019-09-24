@@ -1,3 +1,6 @@
+body{
+	font-size: 12px;
+}
 .container{
 	width: 1220px;
 	margin-left: auto;
@@ -18,4 +21,23 @@
 }
 .clearfix{
 	*zoom:1;
+}
+a{
+	text-decoration: none;
+}
+a{
+	color:#4d555d;
+}
+a.link:hover{
+	color:#ea657a;
+}
+.transition{
+	transition: all 0.5s
+}
+.dropdown{
+	position: relative;
+}
+.dropdown-layer{
+	display: none;
+	position: absolute;
 }
