@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>显示隐藏-卷入卷出</title>
+	<title>显示隐藏-js卷入卷出</title>
 <style>
 		*{
 			margin: 0;
@@ -71,81 +71,46 @@
 	var js = {
 		fade:{
 			init:function($elem){
-			 js._init($elem)
+			$elem.removeClass('transition')
+			 init($elem);
 			},
 			show:function($elem){
-				js._show($elem,'fadeIn');
+				show($elem,function(){
+					$elem.stop();
+					$elem.fadeIn();
+					$elem.trigger('shown').data('status','shown');
+				})
 			},
 			hide:function($elem){
-				js._hide($elem,'fadeOut');
+				hide($elem,function(){
+					$elem.stop();
+					$elem.fadeOut();
+					$elem.trigger('hiden').data('status','hiden');
+				})
 
 			}
 		},
-		slide:{
+		slideDownUp:{
 			init:function($elem){
-			 js._init($elem);
+			$elem.removeClass('transition')
+			 init($elem);
 			},
 			show:function($elem){
-				js._show($elem,'slideDown');
+				show($elem,function(){
+					$elem.stop();
+					$elem.slideDown();
+					$elem.trigger('shown').data('status','shown');
+				})
 			},
 			hide:function($elem){
-				js._hide($elem,'slideUp');
-
-			}
-		},
-		slideLeftRight:{
-			//1.将隐藏之前的状态（水平值存起来）
-			//borderLeftWidth,paddingLeft,width,paddingRight,borderRightWidth
-			// var styles = {
-			// 	borderLeftWidth:$elem.css('borderLeftWidth'),
-			// 	paddingLeft:$elem.css('paddingLeft'),width:$elem.css('width'),
-			// 	borderRightWidth:$elem.css('borderLeftWidth'),
-			// 	paddingRight:$elem.css('paddingLeft'),
-			// 	$elem.data('styles',styles)
-			// 	console.log(styles);
-
-			// }
-			init:function($elem){
-				$elem.removeClass('transition');
-				//1.将隐藏之前的状态（水平值存起来）
-				//borderLeftWidth,paddingLeft,width,paddingRight,borderRightWidth
-				var styles = {
-			 	borderLeftWidth:$elem.css('borderLeftWidth'),
-				paddingLeft:$elem.css('paddingLeft'),width:$elem.css('width'),
-			 	borderRightWidth:$elem.css('borderLeftWidth'),
-			 	paddingRight:$elem.css('paddingLeft'),
-				 }
-				 $elem.data('styles',styles)
-			 	 // console.log(styles);
-			 	 // 如果是隐藏的话，需要把水平方向的值设置为0
-			 	 
-
-			},
-			show:function(){
-
-			},
-			hide:function(){
+				hide($elem,function(){
+					$elem.stop();
+					$elem.slideUp();
+					$elem.trigger('hiden').data('status','hiden');
+				})
 
 			}
 		}
-	}
-	js._init = function($elem){
-		$elem.removeClass('transition');
-		 init($elem);
-	}
-	js._show = function($elem,mode){
-		show($elem,function(){
-			$elem.stop();
-			$elem[mode]();
-			$elem.trigger('shown').data('status','shown');
-		})
-	}
-	js._hide = function($elem,mode){
-		hide($elem,function(){
-			$elem.stop();
-			$elem[mode]();
-			$elem.trigger('hiden').data('status','hiden');
-		})
 	}
 
 	var $elem = $('#box');
@@ -170,7 +135,7 @@
 	})
 	$('button').eq(1).on('click',function(){
 		slient.hide($elem)
-	})*/
+	})
 	
 	
 	js.fade.init($elem)
@@ -180,20 +145,13 @@
 	$('button').eq(1).on('click',function(){
 		js.fade.hide($elem)
 	})
-	
-	/*js.slide.init($elem)
+	*/
+	js.slideDownUp.init($elem)
 	$('button').eq(0).on('click',function(){
-		js.slide.show($elem)
+		js.slideDownUp.show($elem)
 	})
 	$('button').eq(1).on('click',function(){
-		js.slide.hide($elem)
-	})*/
-	js.slideLeftRight.init($elem)
-	$('button').eq(0).on('click',function(){
-		js.slideLeftRight.show($elem)
-	})
-	$('button').eq(1).on('click',function(){
-		js.slideLeftRight.hide($elem)
+		js.slideDownUp.hide($elem)
 	})
 		
 
