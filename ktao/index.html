@@ -17,9 +17,8 @@
 				<li class="fl"><a href="#" class="link">免费注册</a></li>
 				<li class="fl"><a href="#" class="link">手机逛跨淘</a></li>
 			</ul>
-			<button>点击</button>
 			<ul class="nav-right fr">
-				<li class="dropdown fl" data-active = "menu">
+				<li class="dropdown fl" data-active = "menu" >
 					<a href="#" class="dropdown-toggle link">
 						我的跨淘
 						<i class="fas dropdown-arrow transition">&#xf107;</i>
@@ -29,14 +28,15 @@
 						<li class="menu-item"><a href="#">我的足迹</a></li>
 					</ul>
 				</li>
-				<li class="dropdown fl" data-active = "menu">
+				<li class="dropdown fl" data-active = "menu" data-url="data/nav-data/center.json">
 					<a href="#" class="dropdown-toggle link">
 						卖家中心
 						<i class="fas dropdown-arrow transition">&#xf107;</i>
 					</a>
-					<ul class="dropdown-layer">
-						<li class="menu-item"><a href="#">已买到的宝贝</a></li>
-						<li class="menu-item"><a href="#">我的足迹</a></li>
+					<ul class="dropdown-layer" >
+						<!-- <li class="menu-item"><a href="#">已买到的宝贝</a></li>
+						<li class="menu-item"><a href="#">我的足迹</a></li> -->
+						<img src="images/loading.gif" alt="" class="dropdown-load">
 					</ul>
 				</li>
 				<li class="fl" data-active = "menu">
@@ -58,10 +58,26 @@
 		</div>
 	</div>
 <!-- 头部导航结束 -->
-
+	
 <!-- 头部区域开始 -->
 	<div class="header">
-		<div class="container"></div>
+		<div class="container">
+			<h1 class="fl">
+				<a href="#" class="header-logo"></a>
+			</h1>
+			<div class="search fl">
+				<form action="">
+					<input type="text" class="search-input fl" autocomplete="">
+					<input type="submit" class="search-btn fl">
+				</form>
+				<ul class="search-layer">
+					<li class="search-item">老师大富科技</li>
+					<li class="search-item">老师大富科技</li>
+					<li class="search-item">老师大富科技</li>
+					<li class="search-item">老师大富科技</li>
+				</ul>
+			</div>
+		</div>
 	</div>
 <!-- 头部区域结束 -->
 
