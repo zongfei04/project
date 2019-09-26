@@ -1,12 +1,7 @@
 // 我的跨淘下拉列表的实现
 ;(function($){
-	$('.dropdown').hover(function(){
-		var activeClass = $('.dropdown').data('active') + "-active";
-		$('.dropdown').addClass(activeClass);
-		$('.dropdown-layer').show();
-	},function(){
-		var activeClass = $('.dropdown').data('active') + "-active";
-		$('.dropdown').removeClass(activeClass);
-		$('.dropdown-layer').hide();
-	})
+	$('.dropdown').dropdown({js:true,mode:"slideDownUp"});
+	/*$('.dropdown').on('dropdown-show dropdown-shown dropdown-hide dropdown-hiden',function(ev){
+
+	})*/
 })(jQuery);
