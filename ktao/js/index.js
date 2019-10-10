@@ -1,5 +1,6 @@
 // 我的跨淘下拉列表的实现
 ;(function($){
+	//头部下拉列表区域
 	function handleDropDown(){
 		var $dropdown = $('.nav-side .dropdown');
 		$dropdown.dropdown({js:true,mode:"slideDownUp",delay:200});
@@ -29,6 +30,7 @@
 		})*/
 	}
 	handleDropDown();
+	//头部搜索区域
 	function handleSearch(){
 		$('.search').search();
 		$('.search').on('getData',function(ev,data){
