@@ -30,7 +30,30 @@
 	}
 	handleDropDown();
 	function handleSearch(){
-		$('.search').search()
+		$('.search').search();
+		$('.search').on('getData',function(ev,data){
+			//1.将数据包装成html代码
+				var html = addLayerHtml(data,10)
+
+				//2.将html代码放到下拉列表中
+				//this.addHtml(html);
+				$('.search').search('addHtml',html);
+				//3.将下拉列表显示出来
+				//this.showLayer();
+				$('.search').search('showLayer');
+		})
+		$('.search').on('getErro',function(){
+			$('.search').search('addHtml');
+			$('.search').search('hideLayer');
+		})
+		function addLayerHtml(data,isNum){
+			var html = '';
+			for(var i = 0;i<data.result.length;i++){
+				if(i>=isNum) break;
+				html+= '<li class="search-item">'+data.result[i][0]+'</li>'
+			}
+			return html
+		}
 	}
 	handleSearch();
 	

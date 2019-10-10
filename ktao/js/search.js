@@ -6,8 +6,10 @@
 		this.$searchBtn = $elem.find('.search-btn');
 		this.$searchInput = $elem.find('.search-input');
 		this.$searchForm = $elem.find('.search-form');
-
-
+		this.$searchLayer = $elem.find('.search-layer');
+		this.isLoadad = false;
+		this.timer = 0;
+		this.jqXHR = null;
 		//2初识化
 		this.init();
 		if(this.options.autocomplete){
@@ -28,31 +30,106 @@
 			this.$searchForm.trigger('submit')
 		},
 		getValue:function(){
-			return this.$searchInput.val();
+			return $.trim(this.$searchInput.val());
 		},
 		autocomplete:function(){
-			//监听输入框的事件
-			this.$searchInput.on('input',$.proxy(this.getData,this))	
+			//1.对显示隐藏部分进行初始化
+			this.$searchLayer.showHide(this.options)
+			//2.监听输入框的oninput事件
+			this.$searchInput.on('input',function(){
+
+				if(this.options.getDataDelay){
+					clearTimeout(this.timer);
+					this.timer = setTimeout(function(){
+						this.getData();
+					}.bind(this),this.options.getDataDelay)
+				}
+				else{
+					this.getData();
+				}
+				
+			}.bind(this))
+			//3.当点击其他部分时让其隐藏起来
+			$(document).on('click',$.proxy(this.hideLayer,this))
+			//4.当再次获取焦点是让其下拉列表显示
+			this.$searchInput.on('focus',$.proxy(this.showLayer,this))
+			//5.阻止获取焦点时的冒泡事件
+			this.$searchInput.on('click',function(ev){
+				ev.stopPropagation();
+			})
+			var _this = this;
+			//6.利用事件委托的方法添加下拉内容
+			this.$searchLayer.on('click','.search-item',function(){
+				//1.获取具体元素的值
+				var elem = $(this);
+				var val = elem.html();
+				//2.将值放入到输入框中
+				_this.$searchInput.val(val);
+				//3.触发表单的提交事件
+				_this.$searchForm.submit();
+
+			})
 		},
 		getData:function(){
-			$.ajax({
-			url:this.options.url+this.getValue(),
-			dataType:'jsonp',
-			jsonp:'callback'
-			}).done(function(data){
-				//
-			}).fail(function(err){
-				console.log(err)
+			if(this.getValue() == ''){
+				this.addHtml('');
+				//如果输入框内容为空，则下拉列表不显示
+				this.hideLayer();
+				return;
+			}
+			if(this.jqXHR){
+				jqXHR.abort();
+			}
+			this.jqXHR = $.ajax({
+				url:this.options.url+this.getValue(),
+				dataType:'jsonp',
+				jsonp:'callback'
 			})
+			.done(function(data){
+				//1.将数据包装成html代码
+				/*var html = '';
+				for(var i = 0;i<data.result.length;i++){
+					html+= '<li class="search-item">'+data.result[i][0]+'</li>'
+				}
+
+				//2.将html代码放到下拉列表中
+				this.addHtml(html);
+				//3.将下拉列表显示出来
+				this.showLayer();*/
+				this.$elem.trigger('getData',[data]);
+			}.bind(this)).fail(function(err){
+				/*this.addHtml('');
+				this.hideLayer();*/
+				this.$elem.trigger('gerErro',[data]);
+
+			}.bind(this)).always(function(){
+				this.jqXHR = null;
+
+			}.bind(this))
+		},
+		hideLayer:function(){
+			this.$searchLayer.showHide('hide');
+		},
+		addHtml:function(html){
+			this.isLoadad = !!html;
+			this.$searchLayer.html(html);
+		},
+		showLayer:function(){
+			if(!this.isLoadad) return
+				this.$searchLayer.showHide('show');
+
 		}
 
 	}
 	Search.DEFAULS = {
 		autocomplete:true,
-		url:"https://suggest.taobao.com/sug?q="
+		url:"https://suggest.taobao.com/sug?q=",
+		js:true,
+		mode:'slideDownUp',
+		getDataDelay:200
 	}
 	$.fn.extend({
-		search:function(options){
+		search:function(options,html){
 			return this.each(function(){
 				var $elem = $(this);
 				var search = $elem.data('search');
@@ -62,7 +139,7 @@
 					$elem.data('search',search);
 				}
 				if(typeof search[options] == 'function'){
-					search[options]();
+					search[options](html);
 				}
 				
 			})
