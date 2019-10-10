@@ -1,4 +1,17 @@
 ;(function($){
+
+	var cache = {
+		data:{},
+		acount:0,
+		addData:function(key,val){
+			this.data[key] = val;
+			this.acount++;
+		},
+		getData:function(){
+			return this.data[key]
+		}
+	}
+
 	function Search($elem,options){
 		//1罗列属性
 		this.$elem = $elem;
@@ -71,7 +84,8 @@
 			})
 		},
 		getData:function(){
-			if(this.getValue() == ''){
+			var inputVal = this.getValue()
+			if(inputVal == ''){
 				this.addHtml('');
 				//如果输入框内容为空，则下拉列表不显示
 				this.hideLayer();
@@ -80,6 +94,12 @@
 			if(this.jqXHR){
 				jqXHR.abort();
 			}
+			//判断缓存中有没有值
+			if(cache.data[inputVal]){
+				this.$elem.trigger('getData',cache.data[inputVal]);
+				return
+			};
+			console.log('发送请求')
 			this.jqXHR = $.ajax({
 				url:this.options.url+this.getValue(),
 				dataType:'jsonp',
@@ -97,6 +117,9 @@
 				//3.将下拉列表显示出来
 				this.showLayer();*/
 				this.$elem.trigger('getData',[data]);
+				var inputVal = this.getValue();
+				cache.addData(inputVal,data);
+				console.log(cache)
 			}.bind(this)).fail(function(err){
 				/*this.addHtml('');
 				this.hideLayer();*/
