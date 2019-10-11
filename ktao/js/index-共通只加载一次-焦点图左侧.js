@@ -1,6 +1,5 @@
 
 ;(function($){
-
 	//只加载一次html共通
 	function loadHtmlOnce($elem,cb){
 		var $layer = $elem.find('.dropdown-layer');
@@ -21,7 +20,6 @@
 				typeof cb == 'function' && cb(data,$layer)
 			})
 	}
-
 	//头部下拉列表区域
 	function handleDropDown(){
 		var $dropdown = $('.nav-side .dropdown');
