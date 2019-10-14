@@ -153,4 +153,10 @@
 		})
 	}
 	handleCategory();
+	//焦点图中部区域轮播图的样式
+	function handleCarousel(){
+		var $carousel = $('.carousel-wrap');
+		$carousel.carousel({});
+	}
+	handleCarousel()
 })(jQuery);
