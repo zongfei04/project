@@ -83,3 +83,59 @@
 		margin-top: 15px;
 	}
 /*广告部分处理结束*/
+/*博主介绍开始*/
+ #col-md-4 .panel-body{
+ 	background-color: rgb(247,247,247);
+ 	border-top: 1px solid #ccc;
+
+ }
+ #col-md-4 .panel-body .media-left img{
+ 	width:100px;
+ 	height:100px;
+ }
+  #col-md-4 .panel-heading a{
+  	text-decoration: none;
+  }
+/*博主介绍结束*/
+/*下拉面版开始*/
+  #col-md-4 #panel-board .panel-heading{
+	background-color: transparent;
+	border-bottom: none;
+  }
+  #col-md-4 #panel-board .panel-heading span{
+  	font-size: 16px;
+  }
+  #col-md-4 #panel-board .list-group-item{
+  	/* 规定段落中的文本不进行换行： */
+    white-space: nowrap;
+    /* 内容会被修剪，并且其余内容是不可见的。 */
+    overflow: hidden;
+    /* 显示省略符号来代表被修剪的文本。 */
+    text-overflow: ellipsis; 
+    background-color: rgb(247,247,247);
+    border-bottom: none;
+    border-top: none;
+  }
+  #col-md-4 #panel-board .list-group-item:hover{
+  	color:#f65a8a;
+  }
+/*下拉面版结束*/
+/*关注我开始*/
+  #col-md-4 #panel-footer .panel-heading{
+  	font-size: 16px;
+  	background-color: transparent;
+  	border-bottom: none;
+  }
+  #col-md-4 #panel-footer .panel-body{
+  	border-top: none;
+  }
+  #col-md-4 #panel-footer .panel-body img{
+  	
+  	width: 100%;
+  	height:100%;
+  }
+/*关注我结束*/
+
+footer{
+	text-align: center;
+}
